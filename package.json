@@ -1,0 +1,19 @@
+{
+  "name": "aws-cloud-cdk",
+  "version": "1.0.0",
+  "description": "This repository is to learn AWS cdkv2. Step steps may skipped.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Code-With-TalhaBhai/AWS-cdk.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Code-With-TalhaBhai/AWS-cdk/issues"
+  },
+  "homepage": "https://github.com/Code-With-TalhaBhai/AWS-cdk#readme"
+}
