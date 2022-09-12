@@ -1,0 +1,37 @@
+type demo {
+  id: String!
+  version: String
+}
+type Query {
+  getDemos: [ demo! ]
+  welcome: String
+}
+input DemoInput {
+  version: String!
+}
+
+input DemoUpdate{
+  id: String
+  version: String
+}
+
+
+type Mutation {
+    getDemoById(id:String!): demo;
+    addDemo(DemoInput: DemoInput!): demo;
+    # updateDemo(id:String!,inpDemo: DemoUpdate!): demo;
+    updateDemo(input: DemoUpdate!): demo;
+    deleteDemo(id: String!): String!; 
+}
+
+
+type Subscription {
+  onCreateMovie: demo
+    @aws_subscribe(mutations:["addDemo"]);
+  onUpdateNote: demo
+    @aws_subscribe(mutations:["updateDemo"]);
+  onGetDemoId: demo
+    @aws_subscribe(mutations:["getDemoById"]);
+  ondeleteDemo: String
+    @aws_subscribe(mutations:["deleteDemo"]);
+}
