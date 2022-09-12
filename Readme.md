@@ -1,1 +1,1 @@
-This repository is to learn AWS cdkv2. Step steps may skipped.
+This repository is to learn AWS cdkv2. Step steps may skipped. But no need to worry.
