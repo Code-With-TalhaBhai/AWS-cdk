@@ -1,0 +1,15 @@
+
+type Data {
+    id: String
+    name: String;
+    product: String;
+}
+
+type Query{
+    getData: [Data];
+}
+
+
+type Mutation{
+    postData(id:String!; name:String; product:String): Data;
+}
