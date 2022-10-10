@@ -1,14 +1,31 @@
 import * as cdk from 'aws-cdk-lib';
+import {SecretValue} from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as codepipeline from 'aws-cdk-lib/aws-codepipeline';
 import * as CodePipelineActions from 'aws-cdk-lib/aws-codepipeline-actions';
-import * as codebuild from 'aws-cdk-lib/aws-codebuild'
+import * as codebuild from 'aws-cdk-lib/aws-codebuild';
+import * as dynamo from 'aws-cdk-lib/aws-dynamodb';
 
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 export class BackenedPipelineStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
+
+    const table = new dynamo.Table(this,'newTable',{
+      tableName: 'CI-CD_FirstTable',
+      partitionKey:{
+        name: 'id',
+        type: dynamo.AttributeType.STRING,
+      }
+    });
+
+    const table2 = new dynamo.Table(this,'SecondTable',{
+      tableName: 'CI-CD_SecondTable',
+      partitionKey:{
+        name: 'id',
+        type: dynamo.AttributeType.STRING,
+      }
+    })
 
 
     // Using CodeBuild(aws_service) to build repo of this project
@@ -18,31 +35,31 @@ export class BackenedPipelineStack extends cdk.Stack {
         phases:{
           install:{
             "runtime-versions": {
-              "nodejs": 16
+              "nodejs": 14
             },
             commands:[
-              'cd Your-repo-name',
-              'cd Your-particular-repo-name',
-              'npm install'
+              // 'cd backened_pipeline',
+              'cd backened_pipeline',
+              'npm ci',
             ]
           },
           build:{
             commands:[
               'npm run build',
-              'npm run cdk synth --o - dist'
+              'npm run cdk synth -- -o dist',
             ]
           },
+        },
           artifacts:{
-            'base-directory': 'mygithub_repo/dist',
+            'base-directory': './backened_pipeline/dist',
             files:[
               `${this.stackName}.template.json`
             ]
           },
-          environment:{
-            buildImage: codebuild.LinuxBuildImage.STANDARD_3_0
-          }
-          },
-        })
+      }),
+        environment:{
+          buildImage: codebuild.LinuxBuildImage.STANDARD_5_0
+        }
       });
 
 
@@ -53,6 +70,8 @@ export class BackenedPipelineStack extends cdk.Stack {
 
 
 
+    // const token = secretmanager.Secret.fromSecretNameV2(this,'mygithubsecret','github_aws').secretValue
+
     // Creating a new pipeline
     const pipeline = new codepipeline.Pipeline(this,'mycodepipeline',{
       pipelineName: 'First-Custom-Pipeline',
@@ -62,15 +81,16 @@ export class BackenedPipelineStack extends cdk.Stack {
 
     // Adding Stages to pipeline
 
+
     // First Stage to pipeline
     pipeline.addStage({
       stageName: 'Source_Stage',
       actions:[
         new CodePipelineActions.GitHubSourceAction({
           actionName: 'Github_source',
-          owner: 'Code-With-TalhaBhai',
-          repo: 'my-repo',
-          oauthToken: cdk.SecretValue.secretsManager('github_aws'), // OAuth Secret store in AWS_Secret_Manager
+          owner: '', // Name of github username(owner).
+          repo: '', // Name of your repo not it. It requires separate repo, here just for code understanding.
+          oauthToken: SecretValue.secretsManager('my-github-secret-token'), // OAuth Secret store in AWS_Secret_Manager
           output: sourceOutput, // Fetches Repository from 'github' and stored in sourceOutput Artiface
           branch: 'Main'
         })
@@ -92,6 +112,7 @@ export class BackenedPipelineStack extends cdk.Stack {
     });
 
 
+    // Add deploy stage
     pipeline.addStage({
       stageName: 'DeploymentStage',
       actions:[
