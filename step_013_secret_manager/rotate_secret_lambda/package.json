@@ -1,8 +1,8 @@
 {
-  "name": "create_auto_secret",
+  "name": "rotate_secret_lambda",
   "version": "0.1.0",
   "bin": {
-    "create_auto_secret": "bin/create_auto_secret.js"
+    "rotate_secret_lambda": "bin/rotate_secret_lambda.js"
   },
   "scripts": {
     "build": "tsc",
@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "aws-cdk-lib": "2.42.0",
-    "aws-sdk": "^2.1219.0",
+    "aws-sdk": "^2.1220.0",
     "constructs": "^10.0.0",
     "source-map-support": "^0.5.21"
   }

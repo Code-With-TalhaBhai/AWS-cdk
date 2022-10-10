@@ -1,5 +1,5 @@
 {
-  "app": "npx ts-node --prefer-ts-exts bin/create_auto_secret.ts",
+  "app": "npx ts-node --prefer-ts-exts bin/backened_pipeline.ts",
   "watch": {
     "include": [
       "**"

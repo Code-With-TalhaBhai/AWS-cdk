@@ -59,9 +59,9 @@ export class Step012GrantIamPoliciesToResourceStack extends cdk.Stack {
     })
 
 
-    new cdk.CfnOutput(this,'GraphqlApiKey',{
-      value: api.apiKey || ''
-    });
+    // new cdk.CfnOutput(this,'GraphqlApiKey',{
+    //   value: api.apiKey || ''
+    // });
 
 
     // Add Lambda Function

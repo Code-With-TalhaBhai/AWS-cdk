@@ -1,13 +1,13 @@
 // import * as cdk from 'aws-cdk-lib';
 // import { Template } from 'aws-cdk-lib/assertions';
-// import * as CreateAutoSecret from '../lib/create_auto_secret-stack';
+// import * as BackenedPipeline from '../lib/backened_pipeline-stack';
 
 // example test. To run these tests, uncomment this file along with the
-// example resource in lib/create_auto_secret-stack.ts
+// example resource in lib/backened_pipeline-stack.ts
 test('SQS Queue Created', () => {
 //   const app = new cdk.App();
 //     // WHEN
-//   const stack = new CreateAutoSecret.CreateAutoSecretStack(app, 'MyTestStack');
+//   const stack = new BackenedPipeline.BackenedPipelineStack(app, 'MyTestStack');
 //     // THEN
 //   const template = Template.fromStack(stack);
 
