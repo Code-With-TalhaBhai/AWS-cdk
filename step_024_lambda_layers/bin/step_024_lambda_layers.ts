@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
-import { Step016ASimpleEmailServiceStack } from '../lib/step_016_simple_email_service-stack';
+import { Step024LambdaLayersStack } from '../lib/step_024_lambda_layers-stack';
 
 const app = new cdk.App();
-new Step016ASimpleEmailServiceStack(app, 'Step016ASimpleEmailServiceStack', {
+new Step024LambdaLayersStack(app, 'Step024LambdaLayersStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */

@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
-import { Step016ASimpleEmailServiceStack } from '../lib/step_016_simple_email_service-stack';
+import { SaveReceivedEmailsInS3Stack } from '../lib/save-received-emails-in-s3-stack';
 
 const app = new cdk.App();
-new Step016ASimpleEmailServiceStack(app, 'Step016ASimpleEmailServiceStack', {
+new SaveReceivedEmailsInS3Stack(app, 'SaveReceivedEmailsInS3Stack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
