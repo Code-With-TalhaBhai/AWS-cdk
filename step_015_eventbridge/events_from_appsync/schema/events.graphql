@@ -1,0 +1,17 @@
+type Item {
+    Main_Key : String!
+    Sort_Key : Int
+    Description: String
+}
+
+type Query {
+    AllItems :  [Item]
+    SingleItem(Sort_Key:Int!): Item
+}
+
+
+type Mutation {
+    PostItem(Sort_Key:Int!, Description:String) : Item
+    DeleteItem(Main_Key:String!): Item
+    UpdateItem(Main_Key:String! Sort_Key:Int,Description:String): Item
+}
