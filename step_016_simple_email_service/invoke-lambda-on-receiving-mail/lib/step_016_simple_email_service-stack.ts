@@ -3,7 +3,7 @@ import { Construct } from 'constructs';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as ses from 'aws-cdk-lib/aws-ses';
 import * as iam from 'aws-cdk-lib/aws-iam';
-import * as sesActions from 'aws-cdk-lib/aws-ses-actions'
+import * as sesActions from 'aws-cdk-lib/aws-ses-actions';
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 export class Step016ASimpleEmailServiceStack extends cdk.Stack {

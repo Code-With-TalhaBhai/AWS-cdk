@@ -80,7 +80,7 @@ export class Step06InvokeStepFunctionWithEventStack extends cdk.Stack {
     });
 
 
-    const st_2 = new tasks.SqsSendMessage()
+    const st_2 = new tasks.SqsSendMessage();
 
 
     // tablefromArn.grantFullAccess(fn1);
