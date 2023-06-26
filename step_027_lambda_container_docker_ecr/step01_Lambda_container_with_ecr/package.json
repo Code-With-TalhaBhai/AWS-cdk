@@ -1,8 +1,8 @@
 {
-  "name": "step_025_lambda_edge",
+  "name": "step01_lambda_container_with_ecr",
   "version": "0.1.0",
   "bin": {
-    "step_025_lambda_edge": "bin/step_025_lambda_edge.js"
+    "step01_lambda_container_with_ecr": "bin/step01_lambda_container_with_ecr.js"
   },
   "scripts": {
     "build": "tsc",

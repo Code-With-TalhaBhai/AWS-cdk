@@ -6,12 +6,13 @@ import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as apigw from 'aws-cdk-lib/aws-apigatewayv2';
 import * as events from 'aws-cdk-lib/aws-events'
 import * as targets from 'aws-cdk-lib/aws-events-targets';
-import { Chain, StateMachine } from 'aws-cdk-lib/aws-stepfunctions';
+import { Chain, StateMachine, TaskInput } from 'aws-cdk-lib/aws-stepfunctions';
 import * as step_functions from 'aws-cdk-lib/aws-stepfunctions';
 import * as tasks from 'aws-cdk-lib/aws-stepfunctions-tasks';
 import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
+import { Topic } from 'aws-cdk-lib/aws-sns';
 
 
 
@@ -71,21 +72,25 @@ export class Step06InvokeStepFunctionWithEventStack extends cdk.Stack {
     );
 
     const st_1 = new tasks.DynamoPutItem(this,'dynamoput',{
+      inputPath: '$.DynamoPath',
       table: tablefromArn,
       item: {
-        id: tasks.DynamoAttributeValue.fromString('1'),
+        id: tasks.DynamoAttributeValue.fromString((Math.random()*100).toString()),
         title: tasks.DynamoAttributeValue.fromString('It is added by step_functions')
       },
       resultPath: '$.Item'
     });
 
 
-    const st_2 = new tasks.SqsSendMessage();
 
+    const st_2 = new tasks.SnsPublish(this,'step-function-publish',{
+      topic: Topic.fromTopicArn(this,'with-stepfn-topic','arn:aws:sns:us-east-1:706908112492:ConsoleTopic'),
+      message: TaskInput.fromText('Hello from AWS Talha')
+    });
 
     // tablefromArn.grantFullAccess(fn1);
 
-    const chain = step_functions.Chain.start(st_1);
+    const chain = step_functions.Chain.start(st_1).next(st_2);
 
     const state_machine = new StateMachine(this,'event-step',{
       definition: chain

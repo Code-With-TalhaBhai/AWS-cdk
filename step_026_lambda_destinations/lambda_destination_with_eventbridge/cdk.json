@@ -1,5 +1,5 @@
 {
-  "app": "npx ts-node --prefer-ts-exts bin/step_025_lambda_edge.ts",
+  "app": "npx ts-node --prefer-ts-exts bin/lambda_destination_with_eventbridge.ts",
   "watch": {
     "include": [
       "**"
