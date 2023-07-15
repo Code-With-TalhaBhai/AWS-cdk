@@ -58,7 +58,11 @@ export class LambdaDestinationWithEventbridgeStack extends cdk.Stack {
       runtime: lambda.Runtime.NODEJS_18_X,
       code: lambda.Code.fromAsset('lambda'),
       handler: 'success.handler'
-    })
+    });
+
+
+    // eventbridge rules docs
+    // https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_lambda_destinations-readme.html#invocation-record
 
     const passRule = new events.Rule(this,'pass-rule',{
       ruleName: 'Destination-pass-rule',
