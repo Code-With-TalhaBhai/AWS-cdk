@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
-import { Step047Ec2Stack } from '../lib/step_047_ec2-stack';
+import { Step047Ec2InstancesStack } from '../lib/step_047_ec2_instances-stack';
 
 const app = new cdk.App();
-new Step047Ec2Stack(app, 'Step047Ec2Stack', {
+new Step047Ec2InstancesStack(app, 'Step047Ec2InstancesStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
